@@ -1,0 +1,26 @@
+.products-list-navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.products-list-navigation a {
+    text-decoration: none;
+    display: block;
+    color: rgb(103, 8, 122);
+    font-size: 20px;
+    border-bottom: 2px solid transparent;
+}
+
+.products-list-navigation a:hover {
+    border-bottom: 2px solid rgb(103, 8, 122);
+}
+
+.products-list-navigation a:active {
+    border-bottom: 2px solid rgb(103, 8, 122);
+}
+.active {
+    background-color: rgba(103, 8, 122, 0.178);
+}

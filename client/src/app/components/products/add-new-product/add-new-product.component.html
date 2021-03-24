@@ -1,0 +1,11 @@
+<label>Name:</label>
+<input type="text" (change)="onNameSelected($event)"><br><br>
+<label>Price:</label>
+<input type="text" (change)="onPriceSelected($event)"><br><br>
+<label>Category:</label>
+<input type="text" (change)="onCategorySelected($event)"><br><br>
+<label>Picture:</label>
+<input type="file" (change)="onImageSelected($event)"><br><br>
+<button (click)="submitForm()">Save</button>
+<hr>
+<img alt="img" src="http://localhost:8080/images/1615574594434-punch banana.jpg">
