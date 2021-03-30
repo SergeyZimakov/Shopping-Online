@@ -17,11 +17,11 @@ export class RegisterComponent implements OnInit {
   @Input() secondName: string ='';
   @Input() city: string ='';
   @Input() street: string ='';
-  registerStatus: string = 'first';
+  registerStep: string = 'first';
   errors: string[] = [];
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -33,12 +33,17 @@ export class RegisterComponent implements OnInit {
       password: this.password,
       confirmPassword: this.confirmPassword
     }
-    console.log(data);
-    this.http.post<any>('http://localhost:8080/api/users/register/step1', data).subscribe(res => {
-      this.errors = res;
-      if (this.errors.length === 0) {
-      console.log('passing to step2');
-      this.registerStatus = 'second';
+    this.http.post<any>('/api/users/register/step1', data).subscribe(res => {     
+      if (res.err) {
+        this.errors.push('Something went wrong');
+      }
+      else {
+        if (res.validatorErrors.length === 0) {
+          this.errors = [];
+          this.registerStep = 'second';
+        } else {
+          this.errors = res.validatorErrors;
+        }
       }
     });
   }
@@ -56,18 +61,19 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
     }
-    console.log(data);
-    
-    this.http.post<any>('http://localhost:8080/api/users/register/step2', data).subscribe(res => {
-      if (res[0] !== 'User successfuly registered') {
-        this.errors = res;
+    this.http.post<any>('/api/users/register/step2', data).subscribe(res => {
+      if (res.err) {
+        this.errors.push('Something went wrong');
       }
       else {
-        console.log('User succefully registered');
-        this.router.navigate(['/home']);
+        if (res.validatorErrors) {
+          this.errors = res.validatorErrors;
+        } else {
+          this.errors = [];
+          console.log(res.msg);
+          this.router.navigate(['/home']);
+        }
       }
     });
-    
   }
-
 }

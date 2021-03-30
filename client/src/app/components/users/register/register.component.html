@@ -1,7 +1,7 @@
 <div *ngIf="errors.length > 0" class="registrationError">
     <ul><li *ngFor="let error of errors">{{error}}</li></ul>
 </div>
-<div *ngIf="registerStatus === 'first'" class="firstStepRegister">
+<div *ngIf="registerStep === 'first'" class="firstStepRegister">
     <label>Id:</label>
     <input type="text" [(ngModel)]="id"><br><br>
     <label>Email:</label>
@@ -13,7 +13,7 @@
     <button (click)="passToStep2()">Step 2</button>
 </div>
 
-<div *ngIf="registerStatus === 'second'" class="secondStepRegister">
+<div *ngIf="registerStep === 'second'" class="secondStepRegister">
     <label>First Name:</label>
     <input type="text" [(ngModel)]="firstName"><br><br>
     <label>Second Name:</label>

@@ -3,36 +3,91 @@ const usersRepository = require('./usersRepository');
 const usersValidator = require('./usersValidator');
 const bcrypt = require('bcrypt');
 
-usersRouter.post('/register/step1', async (req, res) => {
-    const step1Data = req.body;
+usersRouter.get('/user/:id', async (req, res) => {
     try {
-        const errors = await usersValidator.step1Validator(step1Data);
-        res.status(200).send(errors);
-    } catch (err) {
-        res.status(400).send(['Something went wrong']);
+        const userId = req.params.id;
+        if (userId === 'null') {
+            res.send(['user not found']);
+        }
+        else {
+            const user = await usersRepository.findById(userId);
+            if (user) {
+                delete user.password;
+                res.send(user);
+            }
+            else {
+            }
+        }
+    } catch(err) {
+        console.log(err);
     }
-    
+});
+
+usersRouter.post('/login', async (req, res) => {
+    const {email, password} = req.body;
+    const user = await usersRepository.findOne({email: email});
+    await bcrypt.compare(password, user.password, async (err, match) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            if (match) {
+                req.session.user = user;
+                res.cookie('userId', user._id.toString());
+                delete user.password;
+                res.send(user);
+            }
+            else {
+                console.log('some error');
+            }
+        }
+    })
+
+});
+
+usersRouter.post('/logout', (req, res) => {
+    if(req.session && req.session.user) {
+        req.session.user = null;
+        res.clearCookie('userId');
+        res.status(200).send(['User logged out']);
+    }
+    else {
+        res.status(400).send(['User was not autorized']);
+    }
+})
+
+usersRouter.post('/register/step1', async (req, res) => {
+    try {
+        const step1Data = req.body;
+        const errors = await usersValidator.step1Validator(step1Data);
+        res.status(200).json({validatorErrors: errors});
+    } catch (err) {
+        res.status(400).json({err: 'Something went wrong'});
+    }    
 });
 
 usersRouter.post('/register/step2', async (req, res) => {
-    const newUserData = req.body;
     try {
+        const newUserData = req.body;
         const errors = await usersValidator.step2Validator(newUserData);
         if (errors.length > 0) {
-            res.send(errors);
+            res.json({validatorErrors: errors});
         }
         else {
             newUserData.role = 'customer';
             newUserData.carts = [];
             newUserData.password = await bcrypt.hash(newUserData.password, 10);
-            const i = await usersRepository.create(newUserData);
-            res.send(['User successfuly registered']);
+            const newUser = await usersRepository.create(newUserData);
+            newUser.save();
+            req.session.user = newUser;
+            res.cookie('userId', newUser._id.toString());
+            res.json({msg: `User ${newUser._id.toString()} registered successfuly`});
         }
     } catch (err) {
-        res.status(400).send(['Something went wrong']);
+        res.status(400).json({err: 'Something went wrong'});
     }
-    
 });
+
 
 
 module.exports = usersRouter;

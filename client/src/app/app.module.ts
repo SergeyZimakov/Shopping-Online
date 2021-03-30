@@ -14,6 +14,8 @@ import { AboutPanelComponent } from './components/about-panel/about-panel.compon
 import { InfoPanelComponent } from './components/info-panel/info-panel.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
+import { CookieService } from 'ngx-cookie-service';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,11 @@ import { RegisterComponent } from './components/users/register/register.componen
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CookieModule.forRoot()
+    
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
