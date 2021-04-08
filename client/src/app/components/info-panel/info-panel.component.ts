@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-panel.component.css']
 })
 export class InfoPanelComponent implements OnInit {
-
-  constructor() { }
+  numberOfOrdersInStore: number = 0;
+  numberOfProductsInStore: number = 0;
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
+    this.http.get<any>('/api/products/totalamount').subscribe(res => {
+      if (res.err) {
+        console.log(res.err);
+      } else {
+        this.numberOfProductsInStore = res.amount;
+      }
+    });
+    this.http.get<any>('/api/orders/totalamount').subscribe(res => {
+      if (res.err) {
+        console.log(res.err);
+      } else {
+        this.numberOfOrdersInStore = res.amount;
+      }
+    });
   }
 
 }

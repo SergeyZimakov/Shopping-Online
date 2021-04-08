@@ -1,14 +1,14 @@
 export interface User {
-    _id: String,
-    id: String,
+    _id: string,
+    id: string,
     name: {
-        first: String,
-        second: String,
+        first: string,
+        second: string,
     },
-    email: String,
+    email: string,
     address: {
-        city: String,
-        street: String,
+        city: string,
+        street: string,
     },
-    carts: [],
+    lastCartId: string,
 }

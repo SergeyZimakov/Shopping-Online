@@ -26,22 +26,27 @@ usersRouter.get('/user/:id', async (req, res) => {
 usersRouter.post('/login', async (req, res) => {
     const {email, password} = req.body;
     const user = await usersRepository.findOne({email: email});
-    await bcrypt.compare(password, user.password, async (err, match) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            if (match) {
-                req.session.user = user;
-                res.cookie('userId', user._id.toString());
-                delete user.password;
-                res.send(user);
+    if (!user) {
+        res.json({err: 'The email or password in incorrect'});
+    }
+    else {
+        await bcrypt.compare(password, user.password, async (err, match) => {
+            if (err) {
+                res.json({err});
             }
             else {
-                console.log('some error');
+                if (match) {
+                    req.session.user = user;
+                    res.cookie('userId', user._id.toString());
+                    delete user.password;
+                    res.json({user});
+                }
+                else {
+                    res.json({err: 'The email or password in incorrect'});
+                }
             }
-        }
-    })
+        })
+    }
 
 });
 
@@ -49,9 +54,12 @@ usersRouter.post('/logout', (req, res) => {
     if(req.session && req.session.user) {
         req.session.user = null;
         res.clearCookie('userId');
+        res.clearCookie('cartId');
         res.status(200).send(['User logged out']);
     }
     else {
+        res.clearCookie('userId');
+        res.clearCookie('cartId');
         res.status(400).send(['User was not autorized']);
     }
 })
@@ -75,7 +83,7 @@ usersRouter.post('/register/step2', async (req, res) => {
         }
         else {
             newUserData.role = 'customer';
-            newUserData.carts = [];
+            newUserData.lastCartId = '';
             newUserData.password = await bcrypt.hash(newUserData.password, 10);
             const newUser = await usersRepository.create(newUserData);
             newUser.save();
@@ -87,7 +95,5 @@ usersRouter.post('/register/step2', async (req, res) => {
         res.status(400).json({err: 'Something went wrong'});
     }
 });
-
-
 
 module.exports = usersRouter;

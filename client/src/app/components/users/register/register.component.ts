@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   @Input() street: string ='';
   registerStep: string = 'first';
   errors: string[] = [];
+  citiesList = ['Jerusalem', 'Tel Aviv', 'Haifa', 'Rishon Le-Tsion', 'Petah Tiqwa', 'Ashdod', 'Netanya', 'Beer Sheva', 'Holon', 'Ramat  Gan'];
   constructor(
     private http: HttpClient,
     private router: Router,

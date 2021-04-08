@@ -1,0 +1,27 @@
+.single-product img {
+    width: 60px;
+}
+
+.single-product {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.quantityPopUpWindow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    z-index: 10;
+    background-color: burlywood;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

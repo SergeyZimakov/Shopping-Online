@@ -8,7 +8,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class UsersService {
-  emptyUser: User = {
+  emptyUser = {
     _id: '',
     id: '',
     name: {
@@ -20,7 +20,7 @@ export class UsersService {
         city: '',
         street: '',
     },
-    carts: [],
+    lastCartId: '',
   };
 
   constructor(
@@ -28,18 +28,22 @@ export class UsersService {
     private cookiesService: CookieService,
   ) { }
   
-  defineCurrentUser(): Observable<User> {
+  defineCurrentUser(): Observable<any> {
     const userId = this.cookiesService.get('userId') ? this.cookiesService.get('userId') : 'null';
-    const user = this.http.get<User>(`/api/users/user/${userId}`);
+    const user = this.http.get<any>(`/api/users/user/${userId}`);
     return user;
   }
 
-  logInHandle(data: object): Observable<User> {
-    const loggedInUser = this.http.post<User>('/api/users/login', data);
-    return loggedInUser;
+  getEmptyUser() {
+    return this.emptyUser;
+  }
+  
+  logInHandle(data: object): Observable<any> {
+    const res = this.http.post<any>('/api/users/login', data);
+    return res;
   }
 
-  logOutHandle(): User {
+  logOutHandle() {
     this.http.post('/api/users/logout', {}).subscribe();
     return this.emptyUser;
   }

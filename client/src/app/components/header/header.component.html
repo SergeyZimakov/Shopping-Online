@@ -1,0 +1,9 @@
+<div class="header">
+    <div>
+        Online Shop
+    </div>
+    <div *ngIf="userName">
+        Hello {{userName}}
+        <button (click)="onLogOut()">Log Out</button>
+    </div>
+</div>

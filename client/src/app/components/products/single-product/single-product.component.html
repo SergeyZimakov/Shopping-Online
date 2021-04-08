@@ -1,0 +1,12 @@
+<div class="cart single-product">
+    <img src="http://localhost:8080/images/{{product.img}}">
+    <h4>{{product.name}}</h4>
+    <p>{{product.price}} ILS</p>
+    <button (click)="quantityPopUpWindowToggle()">Add</button>
+
+    <div [class]="quantityPopUpWindowStyle">
+        <input type="number" [(ngModel)]="quantity">
+        <button (click)="addProductToCart()">Submit</button>
+        <button (click)="quantityPopUpWindowToggle()">Cancel</button>
+    </div>
+</div>

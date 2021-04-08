@@ -19,7 +19,10 @@
     <label>Second Name:</label>
     <input type="text" [(ngModel)]="secondName"><br><br>
     <label>City:</label>
-    <input type="text" [(ngModel)]="city"><br><br>
+    <select [(ngModel)]="city">
+        <option *ngFor="let city of citiesList" value="{{city}}">{{city}}</option>
+    </select><br><br>
+    <!-- <input type="text" [(ngModel)]="city"><br><br> -->
     <label>Street:</label>
     <input type="text" [(ngModel)]="street"><br><br>
     <button (click)="onRegisterSubmit()">Register</button>

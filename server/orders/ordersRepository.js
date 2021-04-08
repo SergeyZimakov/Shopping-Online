@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orders = new Schema({
-    userId: Number,
-    cartId: Number,
-    price: Number,
+    userId: String,
+    cartId: String,
+    price: String,
     address: {
         city: String,
         street: String,

@@ -1,8 +1,3 @@
-<div class="field">
-    <div class="singleProduct" *ngFor="let product of products">
-        <img src="http://localhost:8080/images/{{product.img}}">
-        <h4>{{product.name}}</h4>
-        <p>{{product.price}} ILS</p>
-    </div>
-
+<div class="app-products-list-category">
+    <app-single-product *ngFor="let product of products" [product]="product"></app-single-product>
 </div>

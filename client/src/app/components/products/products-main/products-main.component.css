@@ -1,0 +1,9 @@
+.app-products-main {
+    display: flex;
+}
+
+.app-cart {
+    border: 1px solid black;
+    width: 25%;
+}
+

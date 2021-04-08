@@ -1,0 +1,10 @@
+.header {
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header button, .header p {
+    display: inline;
+}

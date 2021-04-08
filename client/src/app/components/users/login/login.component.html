@@ -1,3 +1,7 @@
+<div *ngIf="logInError">
+    <h4 style="color: crimson;">{{logInError}}</h4>
+</div>
+
 <div *ngIf="!currentUser.id">
     <h1>Log In</h1>
     <p>Do not registered yet?<a href="/register"> Register</a></p>
@@ -9,6 +13,45 @@
 </div>
 
 <div *ngIf="currentUser.id" >
-    <h4>{{currentUser.name.first}} is logged in</h4>
-    <button (click)="onLogOutHandle()">Log Out</button>
+    <h4>Hello {{currentUser.name.first}} {{currentUser.name.second}}!</h4>
+    <!-- <div *ngIf="lastCart.status === 'active'" class="lastCartInfo">
+        <h4>You have an open cart</h4>
+        <p>{{lastCart.createdAt}}</p>
+        <p>Total price: {{lastCart.price}}</p>
+        <button (click)="navToProducts()">Continue buying</button>
+    </div>
+
+    <div *ngIf="lastCart.status === 'closed'">
+        <div>
+            <P>Total price of your last order: {{lastCart.price}}</P>
+            <P>Now you can start a new buying</P>
+        </div>
+        <button (click)="navToProducts()">New buying</button>
+    </div>
+
+    <div *ngIf="lastCart.status === ''">
+        <div>
+            <h4>You can start your first buying at our store!</h4>
+        </div>
+        <button (click)="navToProducts()">Start your first buying</button>
+    </div> -->
+    <div [ngSwitch]="cartShortInfo.status">
+        <div *ngSwitchCase="'new'">
+            <h4>You can start your first buying at our store !</h4>
+            <button (click)="startShopping()">Start your first shopping</button>
+        </div>
+        <div *ngSwitchCase="'active'">
+            <h4>You have an open cart</h4>
+            <p>Total price: {{cartShortInfo.price}}</p>
+            <p>{{cartShortInfo.createdAt}}</p>
+            <button (click)="startShopping()">Continue shopping</button>
+        </div>
+        <div *ngSwitchCase="'closed'">
+            <h4>Your last order:</h4>
+            <p>Total price: {{cartShortInfo.price}}</p>
+            <p>{{cartShortInfo.createdAt}}</p>
+            <button (click)="startShopping()">New shopping</button>
+        </div>
+        <div *ngSwitchDefault>output2</div>
+    </div>
 </div>

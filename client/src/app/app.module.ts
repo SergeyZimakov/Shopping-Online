@@ -16,6 +16,10 @@ import { LoginComponent } from './components/users/login/login.component';
 import { RegisterComponent } from './components/users/register/register.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CookieModule } from 'ngx-cookie';
+import { CartComponent } from './components/cart/cart.component';
+import { ProductsMainComponent } from './components/products/products-main/products-main.component';
+import { SingleProductComponent } from './components/products/single-product/single-product.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { CookieModule } from 'ngx-cookie';
     AboutPanelComponent,
     InfoPanelComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CartComponent,
+    ProductsMainComponent,
+    SingleProductComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

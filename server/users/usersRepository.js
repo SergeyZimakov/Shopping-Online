@@ -1,26 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const cartItem = new Schema({
-    productId: Number,
-    quantity: Number,
-    price: Number,
-},
-{
-  versionKey: false,
-});
+// const cartItem = new Schema({
+//     productId: Number,
+//     quantity: Number,
+//     price: Number,
+// },
+// {
+//   versionKey: false,
+// });
 
-const cart = new Schema({
-    createdAt: String,
-    status: {
-        type: String,
-        enum: ['active', 'closed'],
-    },
-    items: [cartItem],
-},
-{
-  versionKey: false,
-});
+// const cart = new Schema({
+//     createdAt: String,
+//     status: {
+//         type: String,
+//         enum: ['active', 'closed'],
+//     },
+//     items: [cartItem],
+//     price: String,
+// },
+// {
+//   versionKey: false,
+// });
 
 
 const users = new Schema({
@@ -39,7 +40,7 @@ const users = new Schema({
         type: String,
         enum: ['admin', 'customer'],
     },
-    carts: [cart],
+    lastCartId: String,
 },
 {
   collection: 'users',
