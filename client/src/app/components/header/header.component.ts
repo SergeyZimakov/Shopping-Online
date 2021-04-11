@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SharedService } from 'src/app/services/shared.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private sharedService: SharedService,
+    private router: Router
   ) {
     this.updateEventSubscription = this.sharedService.getComponentUpdateEvent().subscribe(() => this.getUserName());
   }
@@ -30,7 +32,8 @@ export class HeaderComponent implements OnInit {
   onLogOut() {
     this.userName = '';
     this.usersService.logOutHandle();
-    this.sharedService.sendComponentUpdateEvent();   
+    this.sharedService.sendComponentUpdateEvent();
+    this.router.navigate(['/home']);
   }
 
 }

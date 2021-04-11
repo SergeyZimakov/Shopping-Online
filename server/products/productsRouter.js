@@ -2,19 +2,16 @@ const productsRouter = require('express').Router();
 const productsRepository = require('./productsRepository');
 const upload = require('../utils/uploadConfig');
 
-// productsRouter.get('/productbyid/:id', async (req, res) => {
-//     try {
-//         const id = req.params.id;
-//         console.log(id);
-//         let products = []
-//         const list = await productsRepository.find();
-//         list.forEach(listItem => listItem.products.forEach(product => products.push(product)));
-//         const product = products.find(p => p._id.toString() === id);
-//         res.send(product);
-//     } catch (err) {
-//         console.log(err);
-//     }
-// })
+
+productsRouter.get('/id/:id', async (req, res) => {
+    try {
+        const list = await productsRepository.findOne({products: {$elemMatch: {_id: req.params.id}}});
+        const product = list.products.find(p => p._id.toString() === req.params.id);
+        res.json(product);
+    } catch (err) {
+        res.status(404).json({err});
+    }
+})
 
 productsRouter.get('/category/:categoryName', async (req, res) => {
     const category = await productsRepository.findOne({categoryName: req.params.categoryName});
@@ -61,7 +58,7 @@ productsRouter.post('/', upload.single("image"), async (req, res) => {
         }
         const newProductData = {
             name,
-            price,
+            price: parseFloat(price),
             img
         }
         categoryFromDb.products.push(newProductData);

@@ -20,6 +20,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { ProductsMainComponent } from './components/products/products-main/products-main.component';
 import { SingleProductComponent } from './components/products/single-product/single-product.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SingleCartItemComponent } from './components/single-cart-item/single-cart-item.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HeaderComponent } from './components/header/header.component';
     CartComponent,
     ProductsMainComponent,
     SingleProductComponent,
-    HeaderComponent
+    HeaderComponent,
+    SingleCartItemComponent,
   ],
   imports: [
     BrowserModule,

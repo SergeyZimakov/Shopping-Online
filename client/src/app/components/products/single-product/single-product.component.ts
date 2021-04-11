@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-single-product',
@@ -19,7 +20,8 @@ export class SingleProductComponent implements OnInit {
   quantityPopUpWindowStyle = 'quantityPopUpWindow hide';
   constructor(
     private cookieService: CookieService,
-    private cartsService: CartService
+    private cartsService: CartService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -35,9 +37,12 @@ export class SingleProductComponent implements OnInit {
       cartId: this.cartId,
       productId: this.product._id,
       quantity: this.quantity,
-      price: this.product.price * this.quantity
     }
-    this.cartsService.addItemToCart(data).subscribe(res => console.log(res));
+    this.cartsService.addItemToCart(data).subscribe(res => {
+      console.log(res);
+      this.sharedService.sendCartUpdateEvent();
+    });
+    this.quantityPopUpWindowToggle();
     
   }
 

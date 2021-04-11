@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
       const date = Date.now();
-      cb(null, `http://localhost:8080/images/${date}-${file.originalname.trim()}`);
+      cb(null, `${date}-${file.originalname.trim()}`);
     }
 });
 

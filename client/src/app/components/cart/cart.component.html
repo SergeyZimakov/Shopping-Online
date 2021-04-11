@@ -1,2 +1,10 @@
 <h1>My Cart</h1>
+<button (click)="onClearAllItemsFromCart()">Clear All</button>
+<div *ngFor="let cartItem of currentCart.items">
+   <app-single-cart-item [cartItem]="cartItem"></app-single-cart-item>
+</div>
+<div>Total Price: {{currentCart.price}}</div>
+<div>
+   <button (click)="passToOrder()">Order</button>
+</div>
 

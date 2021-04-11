@@ -50,20 +50,21 @@ export class LoginComponent implements OnInit {
         if (res.user.lastCartId) {
           this.lastCartId = res.user.lastCartId;
           this.cartService.getCartShortInfoById(res.user.lastCartId).subscribe(res => this.cartShortInfo = res);
+          this.cartService.attachCartToSession(res.user.lastCartId).subscribe();
         }
         else {
           this.cartShortInfo.status = 'new';
+          this.cartService.attachCartToSession().subscribe();
         }
       }
     });
   }
   onLogOutHandle() {
     this.currentUser = this.usersService.getEmptyUser();
-    this.router.navigate(['/home']);
+    // this.router.navigate(['/home']);
   }
 
   startShopping() {
-    this.cartService.attachCartToSession(this.lastCartId).subscribe()
     this.router.navigate(['/products']);
   }
 

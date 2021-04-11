@@ -7,10 +7,22 @@ import { Product } from './product';
   providedIn: 'root'
 })
 export class CategoryService {
-
+  emptyProduct: Product = {
+    _id: '',
+    name: '',
+    price: 0,
+    img: ''
+}
   constructor(private http: HttpClient) { }
 
+  getEmptyProduct() {
+    return this.emptyProduct;
+  }
   getCategory(category: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`http://localhost:8080/api/products/category/${category}`);
+    return this.http.get<Product[]>(`/api/products/category/${category}`);
+  }
+
+  getProductById(productId: string): Observable<Product> {
+    return this.http.get<Product>(`/api/products/id/${productId}`);
   }
 }

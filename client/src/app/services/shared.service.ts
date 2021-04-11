@@ -6,14 +6,23 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SharedService {
 
-  private subject = new Subject<any>();
+  private subjectHeader = new Subject<any>();
+  private subjectCart = new Subject<any>();
   
   sendComponentUpdateEvent() {
-    this.subject.next();
+    this.subjectHeader.next();
   }
 
   getComponentUpdateEvent(): Observable<any> {
-    return this.subject.asObservable();
+    return this.subjectHeader.asObservable();
+  }
+
+  sendCartUpdateEvent() {
+    this.subjectCart.next();
+  }
+
+  getCartUpdateEvent(): Observable<any> {
+    return this.subjectCart.asObservable();
   }
 
   
