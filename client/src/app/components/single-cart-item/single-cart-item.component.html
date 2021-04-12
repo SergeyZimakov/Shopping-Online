@@ -1,5 +1,5 @@
 <div class="cartItem">
     <p>{{product.name}} - {{cartItem.quantity}} units - {{cartItem.price}} ILS</p>
     <img src="http://localhost:8080/images/{{product.img}}">
-    <button (click)="onDeleteItemFromCart()">Delete</button>
+    <button *ngIf="btnEnable" (click)="onDeleteItemFromCart()">Delete</button>
 </div>

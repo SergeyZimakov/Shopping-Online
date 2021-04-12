@@ -21,6 +21,8 @@ import { ProductsMainComponent } from './components/products/products-main/produ
 import { SingleProductComponent } from './components/products/single-product/single-product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SingleCartItemComponent } from './components/single-cart-item/single-cart-item.component';
+import { OrderMainComponent } from './components/orders/order-main/order-main.component';
+import { OrderComponent } from './components/orders/order/order.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { SingleCartItemComponent } from './components/single-cart-item/single-ca
     SingleProductComponent,
     HeaderComponent,
     SingleCartItemComponent,
+    OrderMainComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

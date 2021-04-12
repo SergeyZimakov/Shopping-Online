@@ -1,0 +1,11 @@
+<label>City:</label>
+<select (dblclick)="fillCityInput()" [(ngModel)]="city">
+    <option *ngFor="let city of citiesList" value="{{city}}">{{city}}</option>
+</select><br><br>
+<label>Street</label>
+<input (dblclick)="fillStreetInput()" type="text" [(ngModel)]="street"><br><br>
+<label>Date</label>
+<input type="date" [(ngModel)]="date"><br><br>
+<label>Credit Card</label>
+<input type="number" [(ngModel)]="creditCard"><br><br>
+<button (click)="submitOrder()">Submit Order</button>
