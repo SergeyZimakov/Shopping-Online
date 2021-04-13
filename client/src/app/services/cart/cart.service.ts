@@ -33,9 +33,9 @@ export class CartService {
     return this.http.get<any>(`/api/carts/cartShortInfo/${cartId}`);
   }
 
-  attachCartToSession(lastCartId?: string): Observable<any> {
+  attachCartToSession(cartStatus: string, lastCartId?: string): Observable<any> {
     const userId = this.cookiesService.get('userId');
-    return lastCartId ? this.http.get<any>(`/api/carts/id/${lastCartId}`) : this.http.post<any>(`/api/carts/createNewCart`, {userId});
+    return cartStatus === 'active' ? this.http.get<any>(`/api/carts/id/${lastCartId}`) : this.http.post<any>(`/api/carts/createNewCart`, {userId});
   }
 
   addItemToCart(data: object) {

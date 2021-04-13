@@ -50,11 +50,11 @@ export class LoginComponent implements OnInit {
         if (res.user.lastCartId) {
           this.lastCartId = res.user.lastCartId;
           this.cartService.getCartShortInfoById(res.user.lastCartId).subscribe(res => this.cartShortInfo = res);
-          this.cartService.attachCartToSession(res.user.lastCartId).subscribe();
+          // this.cartService.attachCartToSession(res.user.lastCartId).subscribe();
         }
         else {
           this.cartShortInfo.status = 'new';
-          this.cartService.attachCartToSession().subscribe();
+          // this.cartService.attachCartToSession().subscribe();
         }
       }
     });
@@ -65,7 +65,9 @@ export class LoginComponent implements OnInit {
   }
 
   startShopping() {
-    this.router.navigate(['/products']);
+    this.cartService.attachCartToSession(this.cartShortInfo.status, this.lastCartId).subscribe(() => {
+      this.router.navigate(['/products']);
+    });
   }
 
 }

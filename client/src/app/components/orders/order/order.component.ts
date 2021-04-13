@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { OrdersService } from 'src/app/services/orders.service';
 import { User } from 'src/app/services/users/user';
 import { UsersService } from 'src/app/services/users/users.service';
 
@@ -8,6 +10,9 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+  orderPopUpWindowClass = 'orderPopUpWindow hide';
+  orderId = '';
+  orderErrors = [];
   currentUser: User;
   @Input() city = '';
   @Input() street = '';
@@ -18,7 +23,9 @@ export class OrderComponent implements OnInit {
 
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private ordersService: OrdersService,
+    private router: Router
   ) { this.currentUser = this.usersService.getEmptyUser() }
 
   ngOnInit(): void {
@@ -33,14 +40,34 @@ export class OrderComponent implements OnInit {
     this.city = this.currentUser.address.city;
   }
 
+
   submitOrder() {
+    this.orderErrors = [];
     const data = {
       city: this.city,
       street: this.street,
       date: this.date,
       creditCard: this.creditCard
     }
-    console.log(data);
+    this.ordersService.orderSubmit(data).subscribe(res => {
+      if (res.errors) {
+        this.orderErrors = res.errors;
+      }
+      else if (res.orderId) {
+        this.orderId = res.orderId;
+        this.orderPopUpWindowClass = 'orderPopUpWindow show';
+        
+      }
+
+    })
+  }
+
+  onDownloadCheck() {
+    this.ordersService.downloadCheck(this.orderId).subscribe();
+  }
+  
+  navToHome() {
+    this.router.navigate(['/home']);
   }
 
 }
