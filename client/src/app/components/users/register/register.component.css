@@ -1,0 +1,53 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+
+.register {
+    padding: 25px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(5, 165, 72);
+    border: 2px solid rgb(5, 165, 72);
+    border-radius: 20px;
+}
+
+.register h1 {
+    text-align: center;
+}
+
+input, select {
+    margin: 10px;
+    color: rgba(5, 165, 72);
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(5, 165, 72);
+}
+
+.bi-arrow-right-circle, .bi-arrow-left-circle {
+    position: absolute;
+    top: 50%;
+    font-size: 36px;
+    color: rgba(5, 165, 72);
+}
+.bi-arrow-right-circle {
+    right: -40px;
+}
+.bi-arrow-left-circle {
+    left: -40px;
+}
+.bi-arrow-right-circle:hover, .bi-arrow-left-circle:hover {
+    cursor: pointer;
+    color: rgba(5, 165, 72, 0.61);
+}
+
+.register .btn {
+    right: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgba(5, 165, 72);
+}
+.register .btn:hover {
+    color: white;
+    background-color: rgba(5, 165, 72);
+}

@@ -1,29 +1,33 @@
-<div *ngIf="errors.length > 0" class="registrationError">
-    <ul><li *ngFor="let error of errors">{{error}}</li></ul>
-</div>
-<div *ngIf="registerStep === 'first'" class="firstStepRegister">
-    <label>Id:</label>
-    <input type="text" [(ngModel)]="id"><br><br>
-    <label>Email:</label>
-    <input type="text" [(ngModel)]="email"><br><br>
-    <label>Password:</label>
-    <input type="password" [(ngModel)]="password"><br><br>
-    <label>Confirm Password:</label>
-    <input type="password" [(ngModel)]="confirmPassword"><br><br>
-    <button (click)="passToStep2()">Step 2</button>
-</div>
+<div class="register">
+    <h1>Register</h1>
+    <div *ngIf="errors.length > 0" class="registrationError">
+        <ul><li *ngFor="let error of errors">{{error}}</li></ul>
+    </div>
+    <div *ngIf="registerStep === 'first'" class="firstStepRegister">
+        <label>Id:</label>
+        <input type="text" [(ngModel)]="id"><br><br>
+        <label>Email:</label>
+        <input type="text" [(ngModel)]="email"><br><br>
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="password"><br><br>
+        <label>Confirm Password:</label>
+        <input type="password" [(ngModel)]="confirmPassword"><br><br>
+        <!-- <button (click)="passToStep2()">Step 2</button> -->
+        <i (click)="passToStep2()" class="bi bi-arrow-right-circle"></i>
+    </div>
 
-<div *ngIf="registerStep === 'second'" class="secondStepRegister">
-    <label>First Name:</label>
-    <input type="text" [(ngModel)]="firstName"><br><br>
-    <label>Second Name:</label>
-    <input type="text" [(ngModel)]="secondName"><br><br>
-    <label>City:</label>
-    <select [(ngModel)]="city">
-        <option *ngFor="let city of citiesList" value="{{city}}">{{city}}</option>
-    </select><br><br>
-    <!-- <input type="text" [(ngModel)]="city"><br><br> -->
-    <label>Street:</label>
-    <input type="text" [(ngModel)]="street"><br><br>
-    <button (click)="onRegisterSubmit()">Register</button>
+    <div *ngIf="registerStep === 'second'" class="secondStepRegister">
+        <label>First Name:</label>
+        <input type="text" [(ngModel)]="firstName"><br><br>
+        <label>Second Name:</label>
+        <input type="text" [(ngModel)]="secondName"><br><br>
+        <label>City:</label>
+        <select [(ngModel)]="city">
+            <option *ngFor="let city of citiesList" value="{{city}}">{{city}}</option>
+        </select><br><br>
+        <label>Street:</label>
+        <input type="text" [(ngModel)]="street"><br><br>
+        <i (click)="backToStep1()" class="bi bi-arrow-left-circle"></i>
+        <div (click)="onRegisterSubmit()" class="btn">Register</div>
+    </div>
 </div>

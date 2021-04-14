@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-register',
@@ -23,10 +24,16 @@ export class RegisterComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
   }
+
+  backToStep1() {
+    this.registerStep = 'first';
+  }
+
   passToStep2() {
     const data = {
       id: this.id,
@@ -72,6 +79,7 @@ export class RegisterComponent implements OnInit {
         } else {
           this.errors = [];
           console.log(res.msg);
+          this.sharedService.sendComponentUpdateEvent();
           this.router.navigate(['/home']);
         }
       }

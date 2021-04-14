@@ -1,7 +1,18 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 .header {
-    height: 50px;
-    border: 1px solid black;
+    padding: 15px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(5, 165, 72, 0.822)
+}
+
+.header-info {
+    display: flex;
+    width: 50%;
     justify-content: space-between;
 }
 
