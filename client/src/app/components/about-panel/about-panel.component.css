@@ -1,0 +1,15 @@
+.about {
+    position: relative;
+}
+
+.about img {
+    width: 200px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.about h4 {
+    text-align: center;
+}
+

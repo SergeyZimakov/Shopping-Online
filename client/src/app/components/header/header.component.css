@@ -7,7 +7,10 @@
     align-items: center;
     font-size: 24px;
     font-weight: bold;
-    background-color: rgba(5, 165, 72, 0.822)
+    color: white;
+    background-color: rgba(5, 165, 72, 0.822);
+    border-radius: 10px;
+    
 }
 
 .header-info {
@@ -16,6 +19,19 @@
     justify-content: space-between;
 }
 
-.header button, .header p {
+.header .btn, .header p {
     display: inline;
 }
+
+.header .btn {
+    margin-top: 20px;
+    right: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+.header .btn:hover {
+    color: rgba(5, 165, 72);
+    background-color: white;
+}
+

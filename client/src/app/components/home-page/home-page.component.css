@@ -1,9 +1,14 @@
 .home-page {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 .home-page-item {
-    border: 1px solid black;
-    margin: 10px;
+    width: 300px;
+    height: 400px;
+    color: rgb(5, 165, 72);
+    border: 2px solid rgb(5, 165, 72);
+    border-radius: 20px;
     padding: 10px;
+    margin-top: 100px;
 }

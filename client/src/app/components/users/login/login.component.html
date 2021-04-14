@@ -1,36 +1,38 @@
-<div *ngIf="logInError">
-    <h4 style="color: crimson;">{{logInError}}</h4>
-</div>
-
-<div *ngIf="!currentUser.id">
-    <h1>Log In</h1>
-    <p>Do not registered yet?<a href="/register"> Register</a></p>
-    <label>User Name:</label>
-    <input type="text" [(ngModel)]="email"><br>
-    <label>Password:</label>
-    <input type="password" [(ngModel)]="password"><br>
-    <button (click)="onLogInHandle()">Log In</button>
-</div>
-
-<div *ngIf="currentUser.id" >
-    <h4>Hello {{currentUser.name.first}} {{currentUser.name.second}}!</h4>
-    <div [ngSwitch]="cartShortInfo.status">
-        <div *ngSwitchCase="'new'">
-            <h4>You can start your first buying at our store !</h4>
-            <button (click)="startShopping()">Start your first shopping</button>
+<div class="login">
+    <div *ngIf="logInError">
+        <h4 style="color: crimson;">{{logInError}}</h4>
+    </div>
+    
+    <div *ngIf="!currentUser.id">
+        <h1>Log In</h1>
+        <p>Do not registered yet?<a href="/register"> Register</a></p>
+        <label>User Name:</label><br>
+        <input type="text" [(ngModel)]="email"><br>
+        <label>Password:</label><br>
+        <input type="password" [(ngModel)]="password"><br>
+        <div class="btn" (click)="onLogInHandle()">Log In</div>
+    </div>
+    
+    <div *ngIf="currentUser.id" >
+        <h4>Hello {{currentUser.name.first}} {{currentUser.name.second}}!</h4>
+        <div [ngSwitch]="cartShortInfo.status">
+            <div *ngSwitchCase="'new'">
+                <h4>You can start your first buying at our store !</h4>
+                <div class="btn" (click)="startShopping()">Start your first shopping</div>
+            </div>
+            <div *ngSwitchCase="'active'">
+                <h4>You have an open cart</h4>
+                <p>Total price: {{cartShortInfo.price}} ILS</p>
+                <p>Date of opening: {{cartShortInfo.createdAt}}</p>
+                <div class="btn" (click)="startShopping()">Continue shopping</div>
+            </div>
+            <div *ngSwitchCase="'closed'">
+                <h4>Your last order:</h4>
+                <p>Total price: {{cartShortInfo.price}} ILS</p>
+                <p>Order date: {{cartShortInfo.createdAt}}</p>
+                <div class="btn" (click)="startShopping()">New shopping</div>
+            </div>
+            <div *ngSwitchDefault>Data is missed, log in again please.</div>
         </div>
-        <div *ngSwitchCase="'active'">
-            <h4>You have an open cart</h4>
-            <p>Total price: {{cartShortInfo.price}}</p>
-            <p>{{cartShortInfo.createdAt}}</p>
-            <button (click)="startShopping()">Continue shopping</button>
-        </div>
-        <div *ngSwitchCase="'closed'">
-            <h4>Your last order:</h4>
-            <p>Total price: {{cartShortInfo.price}}</p>
-            <p>{{cartShortInfo.createdAt}}</p>
-            <button (click)="startShopping()">New shopping</button>
-        </div>
-        <div *ngSwitchDefault>Data is missed, log in again please.</div>
     </div>
 </div>

@@ -2,6 +2,7 @@ const cartsRouter = require('express').Router();
 const cartsRepository = require('./cartsRepository');
 const usersRepository = require('../users/usersRepository');
 const productsRepository = require('../products/productsRepository');
+const ordersRepository = require('../orders/ordersRepository');
 const cartsUtils = require('./cartsUtils');
 
 cartsRouter.get('/id/:cartId', async (req, res) => {
@@ -23,7 +24,13 @@ cartsRouter.get('/cartShortInfo/:cartId', async (req, res) => {
         const { cartId } = req.params;
         const cart = await cartsRepository.findById(cartId);
         if (cart) {
-            res.json({status: cart.status, price: cart.price, createdAt: cart.createdAt});
+            if (cart.status === 'active') {
+                res.json({status: cart.status, price: cart.price, createdAt: cart.createdAt});
+            }
+            else {
+                const order = await ordersRepository.findOne({cartId});
+                res.json({status: cart.status, price: cart.price, createdAt: order.deliveryDate});
+            }
         } else {
             res.status(404).json({err: 'Error. Cart not found'});
         }
