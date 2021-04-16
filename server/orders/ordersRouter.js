@@ -39,16 +39,13 @@ async function createCheck (cartId, price) {
         for (i=0; i<items.length; i++) {
             products.push(items[i].productId);
         }
-        console.log(products);
         for (i=0; i<products.length; i++) {
             const list = await productsRepository.findOne({products: {$elemMatch: {_id: products[i]}}});
             const product = list.products.find(p => p._id.toString() === products[i]);
             const productName = product.name;
-            console.log(productName);
-            text += `${product.name}.....${product.price}ILS\n`;
-            console.log(text);
+            text += `${product.name}.....${product.price} ILS\n`;
         }
-        text += `Total price: ${price}ILS`;
+        text += `\nTotal price: ${price} ILS`;
         return text;
     }
     catch (err) {

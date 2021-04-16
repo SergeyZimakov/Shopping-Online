@@ -1,6 +1,10 @@
+<div class="search">
+    <input [(ngModel)]="nameToMark" (keyup)="searchInCart()" type="text">
+    <i class="bi bi-search"></i>
+</div>
 <div class="order-main">
     <div class="order-cart">
-        <app-cart></app-cart>
+        <app-cart [nameToMark]="nameToMark"></app-cart>
     </div>
     <div class="order-form">
         <app-order></app-order>

@@ -1,5 +1,6 @@
 <div class="register">
     <h1>Register</h1>
+    <p>Already have an accaunt? Back to <a href="/home">Log In</a></p>
     <div *ngIf="errors.length > 0" class="registrationError">
         <ul><li *ngFor="let error of errors">{{error}}</li></ul>
     </div>

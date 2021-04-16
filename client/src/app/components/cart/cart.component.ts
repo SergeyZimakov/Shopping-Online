@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   btnEnable: boolean = true;
   currentCart: Cart;
   updateEventSubscription: Subscription;
+  @Input() nameToMark: string = '';
   constructor(
     private cartService: CartService,
     private cookieService: CookieService,
@@ -33,7 +34,12 @@ export class CartComponent implements OnInit {
   }
 
   passToOrder() {
-    this.router.navigate(['/order']);
+    if (this.currentCart.items.length === 0) {
+      alert('You do not have any product in your cart yet.\nPlease choose something before you make an order.\nThank you')
+    }
+    else {
+      this.router.navigate(['/order']);
+    }
   }
   
   backToShop() {

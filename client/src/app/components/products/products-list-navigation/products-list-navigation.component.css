@@ -8,18 +8,19 @@
 .products-list-navigation a {
     text-decoration: none;
     display: block;
-    color: rgb(103, 8, 122);
+    color: rgb(5, 165, 72);
     font-size: 20px;
     border-bottom: 2px solid transparent;
 }
 
+
 .products-list-navigation a:hover {
-    border-bottom: 2px solid rgb(103, 8, 122);
+    border-bottom: 2px solid rgb(5, 165, 72);
 }
 
 .products-list-navigation a:active {
-    border-bottom: 2px solid rgb(103, 8, 122);
+    border-bottom: 2px solid rgb(5, 165, 72);
 }
 .active {
-    background-color: rgba(103, 8, 122, 0.178);
+    background-color: rgba(5, 165, 72, 0.205);
 }

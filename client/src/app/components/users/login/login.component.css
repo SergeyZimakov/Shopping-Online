@@ -5,24 +5,7 @@
     justify-content: space-between;
 }
 
-input {
-    margin: 10px;
-    color: rgba(5, 165, 72);
-    outline: none;
-    border: none;
-    border-bottom: 1px solid rgba(5, 165, 72);
-}
-
 .login .btn {
     margin-top: 20px;
     right: 50%;
-    cursor: pointer;
-    font-weight: bold;
-    color: rgba(5, 165, 72);
-    border: 1px solid rgba(5, 165, 72);
-    border-radius: 10px;
-}
-.login .btn:hover {
-    color: white;
-    background-color: rgba(5, 165, 72);
 }

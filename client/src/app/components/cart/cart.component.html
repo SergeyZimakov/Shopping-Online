@@ -1,11 +1,17 @@
-<h1>My Cart</h1>
-<button *ngIf="btnEnable" (click)="onClearAllItemsFromCart()">Clear All</button>
-<button *ngIf="!btnEnable" (click)="backToShop()">Back To Shop</button>
-<div *ngFor="let cartItem of currentCart.items">
-   <app-single-cart-item [cartItem]="cartItem"></app-single-cart-item>
-</div>
-<div>Total Price: {{currentCart.price}}</div>
-<div>
-   <button *ngIf="btnEnable" (click)="passToOrder()">Order</button>
+<div class="my-cart">
+   <h1>My Cart <i class="bi bi-cart4"></i></h1>
+   <div class="cart-items">
+      <div *ngFor="let cartItem of currentCart.items">
+         <app-single-cart-item [cartItem]="cartItem"></app-single-cart-item>
+      </div>
+   </div>
+   <div class="cart-footer">
+      <div *ngIf="btnEnable" class="btn btn-clear" (click)="onClearAllItemsFromCart()">Clear All</div>
+      <div>
+         <div *ngIf="!btnEnable" class="btn" (click)="backToShop()">Back To Shop</div>
+         <div *ngIf="btnEnable" class="btn" (click)="passToOrder()">Order</div>
+      </div>
+      <div>Total Price: {{currentCart.price}} ILS</div>
+   </div>
 </div>
 

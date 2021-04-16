@@ -11,12 +11,12 @@
 <input type="date" [(ngModel)]="date"><br><br>
 <label>Credit Card</label>
 <input type="text" [(ngModel)]="creditCard"><br><br>
-<button (click)="submitOrder()">Submit Order</button>
+<div class="btn" (click)="submitOrder()">Submit Order</div>
 
 <div [class]="orderPopUpWindowClass">
     <h3>Thank You!</h3>
     <h5>Your order submited</h5>
-    <p>You can download your check</p>
+    <span>You can download your check </span>
     <a href="/api/orders/download/{{orderId}}">here</a>
-    <button (click)="navToHome()">Ok</button>
+    <div class="btn" (click)="navToHome()">Ok</div>
 </div>

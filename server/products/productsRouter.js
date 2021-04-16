@@ -11,7 +11,24 @@ productsRouter.get('/id/:id', async (req, res) => {
     } catch (err) {
         res.status(404).json({err});
     }
-})
+});
+
+productsRouter.get('/name/:name', async (req, res) => {
+    try {
+        let products = [];
+        const list = await productsRepository.find();
+        list.forEach( l => {
+            l.products.forEach( p => {
+                if (p.name.toLowerCase() === req.params.name.toLowerCase()) {
+                    products.push(p);
+                }
+            })
+        })
+        res.json(products);
+    } catch (err) {
+        res.status(404).json({err});
+    }
+});
 
 productsRouter.get('/category/:categoryName', async (req, res) => {
     const category = await productsRepository.findOne({categoryName: req.params.categoryName});

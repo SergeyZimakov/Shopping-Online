@@ -1,10 +1,19 @@
 <div>
-    <div class="app-products-main">
-        <div class="app-cart">
+    <div class="search">
+        <input [(ngModel)]="nameToSearch" type="text">
+        <div class="btn" (click)="searchByName()"><i class="bi bi-search"></i> Search</div>
+    </div>
+    <div class="products-main">
+        <div class="app-cart" [style]="cartStyle">
             <app-cart></app-cart>
+            <i [class]="toggleIconClass" (click)="changeWidth()"></i>
         </div>
-        <div class="app-products-list">
+        <div *ngIf="searchResultsAreHidden" class="app-products-list">
             <app-products-list></app-products-list>
+        </div>
+        <div *ngIf="!searchResultsAreHidden" class="app-products-list">
+            <app-single-product *ngFor="let product of searchResults" [product]="product"></app-single-product>
+            <div class="btn" (click)="hideSearchResults()">Back to products</div>
         </div>
     </div>
 </div>

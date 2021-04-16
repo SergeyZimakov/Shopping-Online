@@ -1,0 +1,28 @@
+.my-cart {
+    margin: 0 15px;
+    padding: 10px;
+    border: 1px solid rgb(5, 165, 72);
+    border-radius: 10px;
+    height: 600px;
+    color: rgb(5, 165, 72);
+    position: relative;
+}
+
+.my-cart .btn {
+    margin: 10px;
+}
+
+.my-cart .btn-clear {
+    font-size: 14px;
+}
+
+.cart-footer {
+    position: absolute;
+    bottom: 10px;
+}
+
+.cart-items {
+    overflow-y: scroll;
+    height: 60%;
+}
+

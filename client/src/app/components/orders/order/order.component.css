@@ -1,11 +1,23 @@
 .orderPopUpWindow {
+    padding: 15px;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
     height: 300px;
-    border: 1px solid black;
+    border: 1px solid rgb(5, 165, 72);
+    border-top: 50px solid rgb(5, 165, 72);
+    border-radius: 25px;
+    background-color: white;
+}
+
+.orderPopUpWindow a {
+    display: inline;
+}
+
+.orderPopUpWindow .btn {
+    margin: 15px;
 }
 
 .hide {

@@ -1,9 +1,23 @@
-.app-products-main {
+.products-main {
     display: flex;
+    margin-top: 30px;
 }
 
 .app-cart {
-    border: 1px solid black;
+    position: relative;
     width: 25%;
 }
 
+.app-cart .bi {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    transform: translate(50%);
+    color: rgba(5, 165, 72);
+    font-size: 26px;
+}
+
+.search input {
+    width: 40%;
+}

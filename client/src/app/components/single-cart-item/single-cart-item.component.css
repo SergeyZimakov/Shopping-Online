@@ -1,3 +1,23 @@
 .cartItem img {
     width: 30px;
 }
+
+.cartItem {
+    position: relative;
+}
+
+.cartItem .bi {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+}
+
+.cartItem .bi:hover {
+    font-size: 18px;
+}
+
+.mark {
+    background-color: rgba(5, 165, 72, 0.295);
+}

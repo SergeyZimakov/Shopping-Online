@@ -15,7 +15,7 @@ export class SingleProductComponent implements OnInit {
     img: '',
     name: ''
   };
-  @Input() quantity = 1;
+  quantity:number = 1;
   cartId = '';
   quantityPopUpWindowStyle = 'quantityPopUpWindow hide';
   constructor(
@@ -28,22 +28,26 @@ export class SingleProductComponent implements OnInit {
     this.cartId = this.cookieService.get('cartId');
     
   }
+
+  increaseQuantity() {
+    this.quantity ++;
+  }
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity --;
+    }
+  }
   quantityPopUpWindowToggle() {
     this.quantityPopUpWindowStyle = this.quantityPopUpWindowStyle === 'quantityPopUpWindow hide' ? 'quantityPopUpWindow show' : 'quantityPopUpWindow hide'
   }
   
-  addProductToCart() {
-    const data = {
-      cartId: this.cartId,
-      productId: this.product._id,
-      quantity: this.quantity,
-    }
-    this.cartsService.addItemToCart(data).subscribe(res => {
+  onAddProductToCart() {
+    this.cartsService.addItemToCart({cartId: this.cartId, productId: this.product._id, quantity: this.quantity}).subscribe(res => {
       console.log(res);
       this.sharedService.sendCartUpdateEvent();
     });
     this.quantityPopUpWindowToggle();
-    
   }
 
 }

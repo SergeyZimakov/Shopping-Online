@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/products/category.service';
+import { Product } from 'src/app/services/products/product';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-order-main',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderMainComponent implements OnInit {
 
-  constructor() { }
+  @Input() nameToMark: string = '';
+  constructor(
+    private productsService: CategoryService,
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  searchInCart() {
+    this.sharedService.sendSearchInCartEvent(this.nameToMark);
   }
 
 }

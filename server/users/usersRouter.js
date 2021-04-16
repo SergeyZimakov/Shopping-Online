@@ -62,7 +62,21 @@ usersRouter.post('/logout', (req, res) => {
         res.clearCookie('cartId');
         res.status(400).send(['User was not autorized']);
     }
-})
+});
+
+usersRouter.post('/register/admin', async (req, res) => {
+    try {
+        const newUserData = req.body;
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        const newUser = await usersRepository.create(newUserData);
+        newUser.save();
+        req.session.user = newUser;
+        res.cookie('userId', newUser._id.toString());
+        res.json({msg: `User ${newUser._id.toString()} registered successfuly`});
+    } catch (err) {
+        res.status(400).json({err: 'Something went wrong'});
+    }
+});
 
 usersRouter.post('/register/step1', async (req, res) => {
     try {

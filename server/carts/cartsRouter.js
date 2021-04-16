@@ -29,7 +29,7 @@ cartsRouter.get('/cartShortInfo/:cartId', async (req, res) => {
             }
             else {
                 const order = await ordersRepository.findOne({cartId});
-                res.json({status: cart.status, price: cart.price, createdAt: order.deliveryDate});
+                res.json({status: cart.status, price: cart.price, createdAt: order.orderDate});
             }
         } else {
             res.status(404).json({err: 'Error. Cart not found'});
@@ -54,7 +54,7 @@ cartsRouter.post('/createNewCart', async (req, res) => {
 cartsRouter.post('/addItem', async (req, res) => {
     try {
         const { cartId, quantity, productId } = req.body;
-        const price = await cartsUtils.getPrice(productId);
+        const price = ((await cartsUtils.getPrice(productId)) * quantity);
         const cart = await cartsRepository.findById(cartId);
         cart.items.push({quantity, price, productId});
         await cart.save();
