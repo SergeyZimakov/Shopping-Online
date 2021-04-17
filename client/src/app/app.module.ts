@@ -23,6 +23,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SingleCartItemComponent } from './components/single-cart-item/single-cart-item.component';
 import { OrderMainComponent } from './components/orders/order-main/order-main.component';
 import { OrderComponent } from './components/orders/order/order.component';
+import { AdminSidebarComponent } from './components/admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { OrderComponent } from './components/orders/order/order.component';
     SingleCartItemComponent,
     OrderMainComponent,
     OrderComponent,
+    AdminSidebarComponent,
   ],
   imports: [
     BrowserModule,

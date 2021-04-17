@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./products-main.component.css']
 })
 export class ProductsMainComponent implements OnInit {
+  userRole: string = '';
   cartStyle = {
     width: '25%'
   };
@@ -24,6 +25,7 @@ export class ProductsMainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.usersService.defineCurrentUser().subscribe(user => this.userRole = user.role);
   }
 
   changeWidth() {

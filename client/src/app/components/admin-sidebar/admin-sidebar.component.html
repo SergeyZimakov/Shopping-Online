@@ -1,0 +1,13 @@
+<div class="btn" (click)="clearFields()">+</div><br>
+
+<label>Name:</label>
+<input type="text" [(ngModel)]="name" (change)="onNameSelected($event)"><br><br>
+<label>Price:</label>
+<input type="text" [(ngModel)]="price" (change)="onPriceSelected($event)"><br><br>
+<div *ngIf="!productIdToUpdate">
+    <label >Category:</label>
+    <input type="text" [(ngModel)]="category" (change)="onCategorySelected($event)"><br><br>
+    <label>Image:</label>
+    <input type="file"  [(ngModel)]="image" (change)="onImageSelected($event)"><br><br>
+</div>
+<div class="btn" (click)="submitForm()">Save</div>

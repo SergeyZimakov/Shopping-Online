@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-single-product',
@@ -18,15 +19,17 @@ export class SingleProductComponent implements OnInit {
   quantity:number = 1;
   cartId = '';
   quantityPopUpWindowStyle = 'quantityPopUpWindow hide';
+  userRole = '';
   constructor(
     private cookieService: CookieService,
     private cartsService: CartService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit(): void {
     this.cartId = this.cookieService.get('cartId');
-    
+    this.usersService.defineCurrentUser().subscribe(user => this.userRole = user.role);
   }
 
   increaseQuantity() {
@@ -48,6 +51,15 @@ export class SingleProductComponent implements OnInit {
       this.sharedService.sendCartUpdateEvent();
     });
     this.quantityPopUpWindowToggle();
+  }
+
+  onProductClicked() {
+    if (this.userRole === 'admin') {
+      this.sharedService.sendUpdateProductEvent(this.product._id);
+    }
+    else {
+      this.quantityPopUpWindowToggle();
+    }
   }
 
 }

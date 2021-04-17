@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CategoriesListService } from 'src/app/services/categoriesList/categories-list.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-products-list-navigation',

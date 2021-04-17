@@ -1,5 +1,6 @@
 const productsRouter = require('express').Router();
 const productsRepository = require('./productsRepository');
+const productsValidator = require('./productsValidator');
 const upload = require('../utils/uploadConfig');
 
 
@@ -68,21 +69,46 @@ productsRouter.post('/', upload.single("image"), async (req, res) => {
         const {name, price, category} = req.body;
         const img = req.file.filename;
         const imgPath = req.file.path;
-        console.log(imgPath);
-        let categoryFromDb = await productsRepository.findOne({categoryName: category});
-        if (!categoryFromDb) {
-            categoryFromDb = await productsRepository.create({categoryName: category, products: []});
+        const errors = productsValidator.validator({name, price, category, img});
+        if (errors.length > 0) {
+            res.json({errors});
         }
-        const newProductData = {
-            name,
-            price: parseFloat(price),
-            img
+        else {
+            let categoryFromDb = await productsRepository.findOne({categoryName: category});
+            if (!categoryFromDb) {
+                categoryFromDb = await productsRepository.create({categoryName: category, products: []});
+            }
+            const newProductData = {
+                name,
+                price: parseFloat(price),
+                img
+            }
+            categoryFromDb.products.push(newProductData);
+            categoryFromDb.save();
+            res.json({msg: 'Product successfully added to db'});
         }
-        categoryFromDb.products.push(newProductData);
-        categoryFromDb.save();
-        res.send({data: categoryFromDb});
-    } catch (error) {
-        res.status(400).send({error});
+    } catch (err) {
+        res.status(400).json({err});
+    }
+})
+
+productsRouter.post('/update/:productId', async (req, res) => {
+    try {
+        const {name, price} = req.body;
+        console.log({name, price});
+        const list = await productsRepository.findOne({products: {$elemMatch: {_id: req.params.productId}}});
+        let product = list.products.find(p => p._id.toString() === req.params.productId);
+        if (name) {
+            product.name = name;
+        }
+        if (price) {
+            product.price = parseFloat(price);
+        }
+        await list.save();
+        console.log(list);
+        res.json('Updated successfully');
+    } catch (err) {
+        res.status(400).json({err});
     }
 })
 

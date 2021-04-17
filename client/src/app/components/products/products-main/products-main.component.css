@@ -21,3 +21,11 @@
 .search input {
     width: 40%;
 }
+
+.admin-sidebar {
+    width: 40%;
+    border: 1px solid rgba(5, 165, 72);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0 10px;    
+}

@@ -52,12 +52,17 @@ export class LoginComponent implements OnInit {
         this.logInError = '';
         this.sharedService.sendComponentUpdateEvent();
         this.currentUser = res.user;
-        if (res.user.lastCartId) {
-          this.lastCartId = res.user.lastCartId;
-          this.cartService.getCartShortInfoById(res.user.lastCartId).subscribe(res => this.cartShortInfo = res);
+        if (res.user.role === 'customer') {
+          if (res.user.lastCartId) {
+            this.lastCartId = res.user.lastCartId;
+            this.cartService.getCartShortInfoById(res.user.lastCartId).subscribe(res => this.cartShortInfo = res);
+          }
+          else {
+            this.cartShortInfo.status = 'new';
+          }
         }
         else {
-          this.cartShortInfo.status = 'new';
+          this.router.navigate(['/products']);    
         }
       }
     });

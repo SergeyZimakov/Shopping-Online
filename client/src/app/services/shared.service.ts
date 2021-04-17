@@ -7,10 +7,13 @@ import { Observable, Subject } from 'rxjs';
 export class SharedService {
 
   searchValue: string = '';
+  productIdToUpdate: string = '';
 
   private subjectHeader = new Subject<any>();
   private subjectCart = new Subject<any>();
   private subjectSearch = new Subject<any>();
+  private subjectUpdateProduct = new Subject<any>();
+  private subjectUpdateList = new Subject<any>();
   
   sendComponentUpdateEvent() {
     this.subjectHeader.next();
@@ -39,6 +42,27 @@ export class SharedService {
 
   getSearchInCartValue() {
     return this.searchValue;
+  }
+
+  sendUpdateProductEvent(productId: string) {
+    this.productIdToUpdate = productId;
+    this.subjectUpdateProduct.next();
+  }
+
+  getUpdateProductEvent() {
+    return this.subjectUpdateProduct.asObservable();
+  }
+
+  getProductIdToUpdate() {
+    return this.productIdToUpdate;
+  }
+
+  sendUpdateListEvent() {
+    this.subjectUpdateList.next()
+  }
+
+  getUpdateListEvent() {
+    return this.subjectUpdateList.asObservable();
   }
 
   
